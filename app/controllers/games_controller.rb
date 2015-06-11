@@ -11,14 +11,23 @@ class GamesController < ApplicationController
 	end
 
 	def create
+
+		@game=Game.new(get_form)
+		@game.save
+		redirect_to games_path
+		
 		
 	end
 
 	def new
 
+		@game=Game.new
+
 	end
 
 	def update
+
+
 
 	end
 
@@ -35,6 +44,11 @@ class GamesController < ApplicationController
 	def get_id
 
 		@game= Game.find(params[:id])
+
+	end
+
+	def get_form
+		params.require(:game).permit(:name, :description, :year)
 
 	end
 end
