@@ -1,0 +1,14 @@
+<%= form_for @game do |f| %>
+
+	<%= f.label :name, "name"%>
+	<%= f.text_field :name%>
+
+	<%= f.label :year, "year"%>
+	<%= f.text_field :year%>
+
+	<%= f.label :description, "description"%>
+	<%= f.text_area :description%>
+
+	<%= f.submit "update" %>
+
+<% end %>

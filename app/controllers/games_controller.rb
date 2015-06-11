@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 
-	before_action :get_id, :only =>[:show, :destroy, :update]
+	before_action :get_id, :only =>[:show, :destroy, :update, :edit]
 
 	def index
 		@games=Game.all
@@ -27,7 +27,8 @@ class GamesController < ApplicationController
 
 	def update
 
-
+		@game.update(get_form)
+		redirect_to game_path
 
 	end
 
@@ -36,10 +37,10 @@ class GamesController < ApplicationController
 		Game.destroy(@game)
 		redirect_to games_path
 
-
 	end 
 
 	def edit
+
 
 	end
 
