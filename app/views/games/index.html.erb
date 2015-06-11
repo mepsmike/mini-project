@@ -1,0 +1,14 @@
+<div><%= link_to 'add' , new_game_path %></div>
+
+<table>
+<% @games.each do |g| %>
+	<tr>
+		<td> <%= g.name %></td>
+		<td> <%= link_to 'More', game_path(g) %></td>
+		<td> <%= link_to 'Edit', edit_game_path(g) %></td>
+		<td> <%= button_to 'Delete', game_path(g), :method => :delete%></td>
+	</tr>
+<% end %>
+
+</table>
+
