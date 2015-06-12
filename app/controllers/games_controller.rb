@@ -3,9 +3,10 @@ class GamesController < ApplicationController
 	before_action :get_id, :only =>[:show, :destroy, :update, :edit]
 
 	def index
-		@games=Game.all
+		@games=Game.page(params[:page]).per(5)
 		@newgame=Game.new
-		
+
+
 	end
 
 	def show
