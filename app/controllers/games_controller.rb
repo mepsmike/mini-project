@@ -5,6 +5,7 @@ class GamesController < ApplicationController
 	def index
 		@games=Game.page(params[:page]).per(5)
 		@newgame=Game.new
+		#@editgame=Game.find(params[:id])
 
 
 	end
@@ -17,6 +18,7 @@ class GamesController < ApplicationController
 
 		@game=Game.new(get_form)
 		@game.save
+		flash[:notice] = "新增成功"
 		redirect_to games_path
 		
 		
@@ -31,7 +33,8 @@ class GamesController < ApplicationController
 	def update
 
 		@game.update(get_form)
-		redirect_to game_path
+		redirect_to games_path
+		flash[:notice] = "更新成功"
 
 	end
 
@@ -39,6 +42,7 @@ class GamesController < ApplicationController
 
 		Game.destroy(@game)
 		redirect_to games_path
+		flash[:notice] = "刪除成功"
 
 	end 
 
