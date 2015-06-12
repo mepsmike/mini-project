@@ -1,14 +1,66 @@
-<div><%= link_to 'add' , new_game_path %></div>
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Board Game</a>
+            <div id="navbar" class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="#"><i class="glyphicon glyphicon-pencil" style="color:white;margin:0"> 新增</i></a></li>
+                    <li><a href="#"><i class="glyphicon glyphicon-th" style="color:white;margin:0"> 瀏覽</i></a></li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    
+                    <li><a href="#"><i class="glyphicon glyphicon-user" style="color:white;margin:0"> 登入/註冊</i></a></li>
+                </ul>
+                <form class="navbar-form navbar-left">
+                    <input type="text" class="form-control" placeholder="搜尋" />
+                </form>
+            </div>
+            <!--/.nav-collapse -->
+        </div>
+        <!--/.container-fluid -->
+    </nav>
 
-<table>
-<% @games.each do |g| %>
-	<tr>
-		<td> <%= g.name %></td>
-		<td> <%= link_to 'More', game_path(g) %></td>
-		<td> <%= link_to 'Edit', edit_game_path(g) %></td>
-		<td> <%= button_to 'Delete', game_path(g), :method => :delete%></td>
-	</tr>
-<% end %>
+    <div class="jumbotron">
+        <div class="container">
+                       <p>This example is a quick exercise to illustrate how the default, static and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.To see the difference between static and fixed top navbars, just scroll.</p>
+        </div>
+    </div>
 
-</table>
+
+	<div class="row ">
+		<div class="col-md-8 col-md-offset-2">
+			<div><%= link_to 'add' , new_game_path %></div>
+			<div><%= form_for @newgame, :url => games_path do |f| %>
+
+	<%= f.label :name, "name"%>
+	<%= f.text_field :name%>
+
+	<%= f.label :year, "year"%>
+	<%= f.text_field :year%>
+
+	<%= f.label :description, "description"%>
+	<%= f.text_area :description%>
+
+	<%= f.submit "Create" %>
+
+<% end %></div>
+				<table class="table text-center">
+				<% @editgame %>
+				<% @games.each do |g| %>
+					<tr>
+						<td> <%= g.name %></td>
+						<td> <%= link_to 'More...', game_path(g)  %></td>
+						<td> <%= link_to '編輯', edit_game_path(g),:class => "btn btn-success btn-sm" %>
+						 <%= link_to '刪除', game_path(g),:class => "btn btn-danger btn-sm", :method => :delete%></td>
+					</tr>
+				<% end %>
+
+				</table>
+			</div>
+			<div class="col-md-4">
+				
+
+			</div>
+		</div>
+	
+
 
