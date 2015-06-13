@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
 
-	before_action :get_id, :only =>[:show, :destroy, :update]
+	before_action :get_id, :only =>[:show, :destroy, :update, :edit]
 
 	def index
 		@games=Game.page(params[:page]).per(5)
@@ -16,12 +16,13 @@ class GamesController < ApplicationController
 
 	def create
 
-		@game=Game.new(get_form)
-		if @game.save
+		@newgame=Game.new(get_form)
+		if @newgame.save
 			flash[:notice] = "新增成功"
 			redirect_to games_path
 		else
-			redirect_to games_path
+			@games=Game.page(params[:page]).per(5)#因為要顯示首頁，所以render前要先抓不然會錯誤
+			render :action => :index
 		
 		end
 		
@@ -41,7 +42,8 @@ class GamesController < ApplicationController
 			redirect_to games_path
 			flash[:notice] = "更新成功"
 		else
-			redirect_to games_path
+			@games=Game.page(params[:page]).per(5) #因為要顯示首頁，所以render前要先抓不然會錯誤
+			render :action => :index
 		end
 	end
 
@@ -55,7 +57,7 @@ class GamesController < ApplicationController
 
 	def edit
 
-		@game = Game.find(params[:id])
+		
 		@games=Game.page(params[:page]).per(5)
 		render :action => :index
 
