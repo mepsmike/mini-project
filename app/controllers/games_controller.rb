@@ -1,11 +1,11 @@
 class GamesController < ApplicationController
 
-	before_action :get_id, :only =>[:show, :destroy, :update, :edit]
+	before_action :get_id, :only =>[:show, :destroy, :update]
 
 	def index
 		@games=Game.page(params[:page]).per(5)
+		
 		@newgame=Game.new
-		#@editgame=Game.find(params[:id])
 
 
 	end
@@ -17,9 +17,14 @@ class GamesController < ApplicationController
 	def create
 
 		@game=Game.new(get_form)
-		@game.save
-		flash[:notice] = "新增成功"
-		redirect_to games_path
+		if @game.save
+			flash[:notice] = "新增成功"
+			redirect_to games_path
+		else
+			redirect_to games_path
+		
+		end
+		
 		
 		
 	end
@@ -32,10 +37,12 @@ class GamesController < ApplicationController
 
 	def update
 
-		@game.update(get_form)
-		redirect_to games_path
-		flash[:notice] = "更新成功"
-
+		if@game.update(get_form)
+			redirect_to games_path
+			flash[:notice] = "更新成功"
+		else
+			redirect_to games_path
+		end
 	end
 
 	def destroy
@@ -47,6 +54,10 @@ class GamesController < ApplicationController
 	end 
 
 	def edit
+
+		@game = Game.find(params[:id])
+		@games=Game.page(params[:page]).per(5)
+		render :action => :index
 
 
 	end

@@ -1,0 +1,22 @@
+<%= form_for (@newgame), :url => games_path, :method => :create do |f| %>
+				  <% if @newgame.errors.any? %>
+    				<div id="error_explanation">
+      					<h2><%= pluralize(@game.errors.count, "error") %> prohibited this person from being saved:</h2>
+
+      					<ul>
+      					<% @newgame.errors.full_messages.each do |message| %>
+       						<li><%= message %></li>
+      					<% end %>
+      					</ul>
+   					 </div>
+  				<% end %>
+
+				<div class="form-group"><%= f.text_field :name, :placeholder => "名稱", :class =>"form-control"%></div>
+				<div class="form-group"><%= f.text_field :year, :placeholder => "出版年份", :class =>"form-control"%></div>
+				<div class="form-group"><%= f.text_area :description, :placeholder => "簡介", :class =>"form-control"%></div>
+
+          <div class="form-group"><%= f.date_field :created_at %></div>
+
+				
+				<%= f.submit "送出", :class => "btn btn-primary btn-lg"%>
+				<% end %>
