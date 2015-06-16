@@ -8,7 +8,18 @@
 </head>
 <body>
 
+<div class="container-fluid">
+
+  <div class="jumbotron" >
+    <h1>桌遊管理系統</h1>
+  </div>
+      <%if flash[:notice].present?%>
+        <div class="alert alert-success text-center" role="alert">
+          <%=flash[:notice]%>
+        </div>
+      <%end%>
 <%= yield %>
 
+</div>
 </body>
 </html>
